@@ -16,8 +16,10 @@ namespace WebApi
             builder.Services.AddSwaggerGen();
 
             builder.Host.UseSerilog((ctx, lc) => lc
-                .WriteTo.Console()                
-                .WriteTo.Trace());
+            .ReadFrom.Configuration(builder.Configuration)
+                //.WriteTo.Console()                
+                //.WriteTo.Trace()
+                );
         
             var app = builder.Build();
 
