@@ -16,11 +16,7 @@ namespace WebApi
             builder.Services.AddSwaggerGen();
 
             builder.Host.UseSerilog((ctx, lc) => lc
-            .ReadFrom.Configuration(builder.Configuration)
-            .WriteTo.EventLog(source: "Api Identification",
-                      logName: "Web Api Application",
-                      manageEventSource: true)
-                );
+            .ReadFrom.Configuration(builder.Configuration));
         
             var app = builder.Build();
 
