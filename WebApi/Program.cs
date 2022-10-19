@@ -17,8 +17,9 @@ namespace WebApi
 
             builder.Host.UseSerilog((ctx, lc) => lc
             .ReadFrom.Configuration(builder.Configuration)
-                //.WriteTo.Console()                
-                //.WriteTo.Trace()
+            .WriteTo.EventLog(source: "Api Identification",
+                      logName: "Web Api Application",
+                      manageEventSource: true)
                 );
         
             var app = builder.Build();
