@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging.EventLog;
 using Serilog;
 
 namespace WebApi
@@ -15,8 +16,19 @@ namespace WebApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Host.UseSerilog((ctx, lc) => lc
-            .ReadFrom.Configuration(builder.Configuration));
+            //builder.Host.UseSerilog((ctx, lc) => lc
+            //.ReadFrom.Configuration(builder.Configuration));
+
+            builder.Services.AddLogging(a => { 
+                a.AddEventLog(b => { 
+                    //b.LogName = "WebApi-LogName";
+                    b.SourceName = builder.Configuration.GetSection("Logging:EventLog:SourceName").Value;
+                }); 
+            }) ;
+
+            //builder.Services.AddLogging(a => { 
+            //    a.AddEventLog(builder.Configuration.GetSe<EventLogSettings>()); 
+            //}) ;
         
             var app = builder.Build();
 
