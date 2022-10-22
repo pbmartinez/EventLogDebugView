@@ -16,6 +16,8 @@ namespace WebApi.Controllers
         [HttpGet("/Division")]
         public ActionResult<double> Division(int a, int b)
         {
+            System.Diagnostics.Debug.WriteLine("Logging con debug");
+            System.Diagnostics.Trace.WriteLine("Logging con trace");
             _logger.LogDebug("Logging Debug: Initiating division method");
             _logger.LogInformation("Logging Information: Executing division");
             if (a == 0 || b == 0)
